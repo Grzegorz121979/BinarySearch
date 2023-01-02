@@ -1,10 +1,12 @@
 """
 binary search
 """
-array = []
+array = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
+"""
 for i in range(1, 10001):
     array.append(i)
+"""
 
 def linear_search(arr, value):
     """searching value
@@ -40,7 +42,7 @@ def binary_search(arr, value):
             return count
         if guess > value:
             high = mid - 1
-        if guess < value:
+        else:
             low = mid + 1
     return None
 
@@ -54,18 +56,17 @@ def interpolar_search(arr, value):
     low = 0
     high = len(arr) - 1
     count = 0
-    
-    while value >= array[low] and value <= high and low <= high:
+    while arr[low] <= value <= arr[high] and low <= high:
         count += 1
         probe = int(low + (high - low) * (value - arr[low]) / (arr[high] - arr[low]))
         if arr[probe] == value:
             return count
-        elif arr[probe] > value:
-            high = probe - 1
-        else:
+        if arr[probe] < value:
             low = probe + 1
-    return -1
+        else:
+            high = probe - 1
+    return None
 
-print(f"Linear search: {linear_search(array, value=8562)}")
-print(f"Binary search: {binary_search(array, value=8562)}")
-print(f"Interpolar search: {interpolar_search(array, value=8562)}")
+print(f"Linear search: {linear_search(array, value=512)}")
+print(f"Binary search: {binary_search(array, value=512)}")
+print(f"Interpolar search: {interpolar_search(array, value=512)}")
